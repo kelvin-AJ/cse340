@@ -6,6 +6,8 @@ require("dotenv").config()
  * But will cause problems in production environment
  * If - else will make determination which to use
  * *************** */
+console.log(process.env)
+
 let pool
 if (process.env.NODE_ENV == "development") {
   pool = new Pool({
@@ -30,9 +32,13 @@ module.exports = {
   },
 }
 } else {
-  pool = new Pool({
-    // connectionString: process.env.DATABASE_URL,
-    connectionString: "postgresql://cse340:uxjNcTAQl03YFUMTfjNV8CWoYLXzmJvK@dpg-cvcut9jv2p9s73ca4e90-a.frankfurt-postgres.render.com/cse340_fudt",
-  })
-  module.exports = pool
+    try {
+        pool = new Pool({
+            connectionString: process.env.DATABASE_URL,
+          })
+          module.exports = pool
+    } catch (error) {
+        console.log("Uh, oh: ", error)
+    }
+  
 }
