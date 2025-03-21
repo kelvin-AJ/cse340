@@ -31,7 +31,8 @@ module.exports = {
 }
 } else {
   pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
+    // connectionString: process.env.DATABASE_URL,
+    connectionString: "postgresql://cse340:uxjNcTAQl03YFUMTfjNV8CWoYLXzmJvK@dpg-cvcut9jv2p9s73ca4e90-a.frankfurt-postgres.render.com/cse340_fudt",
   })
   module.exports = pool
 }
