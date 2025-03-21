@@ -27,9 +27,20 @@ div#wrapper{
   }
   
 
-  nav ul{
-    padding: 0px;
-  }
+nav ul{
+  padding: 0px;
+}
+nav ul li{
+  font-size: 0.8rem;
+}
+nav ul li:hover {
+  background-color: var(--primary-gray);
+}
+
+nav ul li a{
+  color: var(--primary-white);
+}
+
 /* Header */
 header#top-header{
 display: flex;
@@ -161,6 +172,27 @@ width: 100%;
     margin: 1rem auto;
   }
 
+/* STYLING FOR INVENTORY GRID */
+#inv-display {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0rem;
+  padding: 0px;
+}
+#inv-display li{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+  width: 20rem;
+  background-color: #d5d7dd81;
+  backdrop-filter: blur(0.1rem);
+  margin:1rem 0.3rem;
+  border-radius: 0.3rem;
+  text-align: center;
+}
+
+
  
   
   /* LARGE */
@@ -174,6 +206,7 @@ width: 100%;
       }
 
     div#wrapper{
+        min-width: 65rem;
         max-width: 70rem;
         background-color: var(--primary-white);
         padding: 0.5rem;
@@ -181,6 +214,9 @@ width: 100%;
         border-radius: 1rem;
       }
     
+      nav ul li{
+        font-size: 1rem;
+      }
 
       .banner-cta {
         align-self: center;
