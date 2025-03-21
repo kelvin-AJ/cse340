@@ -192,8 +192,16 @@ width: 100%;
   text-align: center;
 }
 
-
- 
+/* 404 HANDLING */
+ .error-msg-main {
+    color: var(--accent-red);
+    font-size: larger;
+    font-weight: bold;
+ }
+ .error-msg-tagline {
+  padding: 2rem;
+  font-style: italic;
+ }
   
   /* LARGE */
 
