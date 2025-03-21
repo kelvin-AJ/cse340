@@ -34,11 +34,15 @@ app.use("/inv", inventoryRoute)
  * Values from .env (environment) file
  *************************/
 const port = process.env.PORT
-const host = process.env.HOST
+const host = null/* process.env.HOST */  //This might be affecting my code
 
 /* ***********************
  * Log statement to confirm server operation
  *************************/
+// app.listen(port, () => {
+//   console.log(`app listening on ${host}:${port}`)
+// })
+
 app.listen(port, () => {
-  console.log(`app listening on ${host}:${port}`)
+  console.log(`app listening on PORT:${port}`)
 })
