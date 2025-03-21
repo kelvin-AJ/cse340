@@ -6,7 +6,6 @@ require("dotenv").config()
  * But will cause problems in production environment
  * If - else will make determination which to use
  * *************** */
-console.log(process.env)
 
 let pool
 if (process.env.NODE_ENV == "development") {
