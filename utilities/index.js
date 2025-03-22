@@ -51,9 +51,32 @@ Util.buildClassificationGrid = async function(data){
     return grid
   }
 
+// Build Inventory Detail
+Util.buildInventoryDetail = async function(vehicle) {
+  const vehicleObj = await vehicle
+  const vehicleDetailHTML = `
+    <div class="details-view">
+			<div class="img-container">
+				<img src="${vehicleObj.inv_image}" alt="Image of ${vehicleObj.inv_make} ${vehicleObj.inv_model}">
+			</div>
+			<div class="details-main">
+				<div><span>${vehicleObj.inv_make}</span> <span>${vehicleObj.inv_model}</span></div>
+				<span class="inventory-detail-description">${vehicleObj.inv_description}</span>
+				<span class="inventory-detail-price">$${parseInt(vehicleObj.inv_price).toLocaleString('en-US')}</span>
+				<span class="inventory-detail-mileage">Milage: ${parseInt(vehicleObj.inv_miles).toLocaleString('en-US')}</span>
+				<span class="inventory-detail-color">Color: ${vehicleObj.inv_color}</span>
+			</div>
+		</div>`
+
+
+  return vehicleDetailHTML
+}
+
+
+
 // GET Witty message for 404 Page
 Util.getWittyMessage = () =>{
-  const funny404Messages = [
+  const funnyErrorMessages = [
     ["Out of Gas!", "Uh-oh, this page ran out of fuel. Ready to refuel at the home page?"],
     ["Wrong Turn!", "Looks like you took the scenic route to nowhere. Let’s head back to the dealership!"],
     ["Engine Stalled!", "The page you’re looking for didn’t pass inspection. Let’s tow you back to safety."],
@@ -65,13 +88,13 @@ Util.getWittyMessage = () =>{
     ["Parking Lot Full!", "There’s no space here! Let’s cruise back to the main lot."],
     ["Out of Service!", "This page is in the shop for repairs. Come back later or return to the home page."]
   ];
-  const funnyMessage = funny404Messages[Math.floor(Math.random() * funny404Messages.length)]
-  const funny404HTML = `<div class="error-msg">
+  const funnyMessage = funnyErrorMessages[Math.floor(Math.random() * funnyErrorMessages.length)]
+  const funnyerrHTML = `<div class="error-msg">
                           <span class="error-msg-main">${funnyMessage[0]}</span><br>
                           <span class="error-msg-tagline">${funnyMessage[1]}</span>
                         </div>`
 
-  return funny404HTML
+  return funnyerrHTML
 }
 
 
