@@ -25,7 +25,7 @@ async function buildSignup(req, res, next) {
 }
 
 // Form Handling
-router.post('/account/signup', utilities.handleErrors(accountController.createAccount))
+router.post('/signup', utilities.handleErrors(accountController.createAccount))
 
 
 module.exports = {buildLogin, buildSignup}

@@ -19,7 +19,7 @@ async function createAccount(req, res) {
         req.flash("notice", `Congratulations, you have successfully registered as ${account_firstname} ${account_lastname}. Please Login.`)
 
 
-        res.status(201).render("account/login", {
+        req.status(201).render("account/login", {
             title: "Login",
             nav,
         })
