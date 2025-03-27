@@ -173,7 +173,7 @@ width: 100%;
   }
 
 /* STYLING FOR INVENTORY GRID */
-#inv-display {
+#inv-display{
   display: flex;
   flex-wrap: wrap;
   margin: 0rem;
@@ -249,6 +249,60 @@ width: 100%;
   font-size: 0.95rem;
   color: var(--site-black);
 }
+.account-form {
+  background: var(--primary-white);
+  border-radius: 8px;
+  text-align: center;
+  width: 100%;
+}
+label {
+  display: block;
+  text-align: left;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+input:focus {
+  background-color: var(--primary-white);
+  outline:none;
+  border-bottom: 0.2rem solid var(--accent-red);
+}
+button {
+  width: 100%;
+  padding: 10px;
+  background: var(--site-black);
+  color: var(--primary-white);
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+button:hover {
+  background: var(--accent-red);
+}
+
+div.password-field-container {
+  display: flex;
+}
+div.password-field-container button{
+  width: 4rem;
+  margin-top: 0px;
+  height: 100%;
+}
+.sign-up-text {
+  display: block;
+  text-align: center;
+  padding: 1rem;
+  font-weight: bold;
+}
 /* 500 HANDLING */
  .error-msg-main {
     color: var(--accent-red);
@@ -274,7 +328,7 @@ width: 100%;
       }
 
     div#wrapper{
-        min-width: 65rem;
+        /* min-width: 50rem; */
         max-width: 70rem;
         background-color: var(--primary-white);
         padding: 0.5rem;

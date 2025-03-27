@@ -1,0 +1,22 @@
+<% title %>
+<h1><%= title %></h1>
+<%- messages() %>
+<div class="acccount-form">
+    <form action="#" method="POST">
+        <label for="account_email">Email: <br>
+            <input type="email" id="account_email" name="account_email" placeholder="joe@cse.com" required>
+        </label>
+       
+        
+        <label for="account_password">Password: <br>
+            <div class="password-field-container">
+                <input type="password" id="account_password" name="account_password" placeholder="Password" required>
+                <button id="hide-show-btn">Show</button>
+            </div>
+        </label>
+        
+        
+        <button type="submit">Login</button>
+    </form>
+    <span class="sign-up-text">No account? <a href="/account/signup">Sign up</a></span>
+</div>

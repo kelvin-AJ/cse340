@@ -1,0 +1,28 @@
+<% title %>
+<h1><%= title %></h1>
+<%- messages() %>
+<div class="account-form">
+    <form action="account/signup" method="post">
+        <label for="account_firstname">First Name: <br>
+            <input type="text" id="first_name" name="account_firstname" placeholder="John" required>
+        </label>
+        
+        <label for="last_name">Last Name: <br>
+            <input type="text" id="last_name" name="last_name" placeholder="Doe" required>
+        </label>
+        
+        <label for="account_email">Email: <br>
+            <input type="email" id="account_email" name="account_email" placeholder="joe@cse.com" required>
+        </label>
+       
+        <label for="account_password">Password: <br>
+            <div class="password-field-container">
+                <input type="password" id="account_password" name="account_password" placeholder="Password" required>
+                <button id="hide-show-btn">Show</button>
+            </div>
+        </label>
+        
+        <button type="submit">Sign Up</button>
+    </form>
+    <span class="sign-in-text">Already have an account? <a href="/account/login">Login</a></span>
+</div>
