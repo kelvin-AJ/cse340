@@ -20,6 +20,7 @@ const inventoryRoute = require("./routes/inventoryRoute")
 const accountRoute = require("./routes/accountRoute")
 const utilities = require("./utilities/")
 const pool = require("./database")
+const regValidate = require('./utilities/account-validation')
 
 
 /* ***********************
@@ -63,6 +64,12 @@ app.use("/inv", utilities.handleErrors(inventoryRoute))
 // Account routes
 app.use("/account/login", utilities.handleErrors(accountRoute.buildLogin))
 app.use("/account/signup", utilities.handleErrors(accountRoute.buildSignup))
+app.use(
+      "/account/create-account",
+      regValidate.registrationRules(),
+      regValidate.checkRegData,
+      utilities.handleErrors(accountRoute.createAccount)
+    )
 
 
 

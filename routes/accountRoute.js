@@ -11,6 +11,7 @@ async function buildLogin(req, res, next) {
     res.render("./account/login", {
         title: "Login",
         nav,
+        errors: null,
     })
     console.log(req.url)
 }
@@ -20,12 +21,16 @@ async function buildSignup(req, res, next) {
     let nav = await utilities.getNav()
     res.render("./account/signup", {
         title: "Sign Up",
-        nav
+        nav,
+        errors: null,
     })
 }
 
 // Form Handling
-router.post('/signup', utilities.handleErrors(accountController.createAccount))
+async function createAccount(req, res, next) {
+    // Reaches out to controller for help
+    accountController.createAccount(req,res)
+}
 
 
-module.exports = {buildLogin, buildSignup}
+module.exports = {buildLogin, buildSignup, createAccount}
