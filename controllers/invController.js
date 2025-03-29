@@ -33,6 +33,51 @@ invCont.buildByInventoryId = async function (req, res, next) {
     }) 
 }
 
+invCont.buildManagementView =  async function (req, res, next) {
+    const nav = await utilities.getNav();
+    res.render("./inventory/management", {
+        nav,
+        title : "Management", 
+        error : null
+    })
+}
 
+invCont.buildAddClasssificationView = async function (req, res, next) {
+    const nav = await utilities.getNav()
+    
+    res.render("inventory/addClassification", {
+        nav,
+        title: "New Classification",
+        errors : null 
+    })
+}
+
+
+
+// CREATING CLASSIFICATION AND INVENTORY
+invCont.addClassification = async function (req, res) {
+    let nav = await utilities.getNav()
+    const { classification_name } = req.body
+    console.log(classification_name)
+    const creationResult = await invModel.createClassification(classification_name)
+    
+    if (creationResult) {
+        req.flash("notice", `${classification_name} has been successfully created.`)
+        res.status(201).render("inventory/management", {
+            title: "Management",
+            nav,
+            errors: null,
+        })
+    } else {
+        req.flash("notice", "Classification wasn't created.")
+        req.status(501).render("inventory/addClassification", {
+            nav,
+            title: "New Classification",
+            errors : null 
+        })
+    }
+    
+
+}
 
 module.exports = invCont

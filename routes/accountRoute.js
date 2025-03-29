@@ -3,34 +3,18 @@ const express = require("express")
 const utilities = require("../utilities")
 const router = new express.Router()
 const accountController = require("../controllers/accountController")
+const regValidate = require('../utilities/account-validation')
 
 
-// Deliver Login View
-async function buildLogin(req, res, next) {
-    let nav = await utilities.getNav()
-    res.render("./account/login", {
-        title: "Login",
-        nav,
-        errors: null,
-    })
-    console.log(req.url)
-}
-// Deliver register view
-async function buildSignup(req, res, next) {
-    console.log(req.url)
-    let nav = await utilities.getNav()
-    res.render("./account/signup", {
-        title: "Sign Up",
-        nav,
-        errors: null,
-    })
-}
+router.use("/login", utilities.handleErrors(accountController.buildLogin))
+router.use("/signup", utilities.handleErrors(accountController.buildSignup))
 
 // Form Handling
-async function createAccount(req, res, next) {
-    // Reaches out to controller for help
-    accountController.createAccount(req,res)
-}
+router.post("/create-account",
+      regValidate.registrationRules(),
+      regValidate.checkRegData,
+      utilities.handleErrors(accountController.createAccount)
+)
 
 
-module.exports = {buildLogin, buildSignup, createAccount}
+module.exports = router

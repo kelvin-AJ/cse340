@@ -11,15 +11,15 @@
 <div class="account-form">
     <form action="/account/create-account" method="post">
         <label for="account_firstname">First Name: <br>
-            <input type="text" id="first_name" name="account_firstname" placeholder="John" required>
+            <input type="text" name="account_firstname" id="accountFirstname" required value="<%= locals.account_firstname %>">
         </label>
         
         <label for="last_name">Last Name: <br>
-            <input type="text" id="last_name" name="account_lastname" placeholder="Doe" required>
+            <input type="text" id="last_name" name="account_lastname" placeholder="Doe"  required value="<%= locals.account_lastname%>">
         </label>
         
         <label for="account_email">Email: <br>
-            <input type="email" id="account_email" name="account_email" placeholder="Enter a valid email address" required>
+            <input type="email" id="account_email" name="account_email" placeholder="Enter a valid email address"  required value="<%= locals.account_email %>">
         </label>
        
         <label for="account_password">Password: <br>
