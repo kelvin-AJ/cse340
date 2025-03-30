@@ -26,20 +26,21 @@ div#wrapper{
     padding: 0.2rem;
   }
   
-
-nav ul{
-  padding: 0px;
-}
-nav ul li{
-  font-size: 0.8rem;
-}
-nav ul li:hover {
-  background-color: var(--primary-gray);
-}
-
-nav ul li a{
-  color: var(--primary-white);
-}
+  nav ul {
+    padding: 0px;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  nav ul li {
+    font-size: 0.8rem;
+    display: inline-block;
+  }
+  nav ul li:hover {
+    background-color: var(--primary-gray);
+  }
+  nav ul li a {
+    color: var(--primary-white);
+  }
 
 /* Header */
 header#top-header{
