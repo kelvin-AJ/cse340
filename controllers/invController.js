@@ -42,23 +42,35 @@ invCont.buildManagementView =  async function (req, res, next) {
     })
 }
 
+
+// MANAGEMENT VIEWs
 invCont.buildAddClasssificationView = async function (req, res, next) {
     const nav = await utilities.getNav()
     
     res.render("inventory/addClassification", {
         nav,
         title: "New Classification",
+        classification_name: null,
         errors : null 
     })
 }
 
+invCont.buildAddInventoryView = async function (req, res, next) {
+    const nav = await utilities.getNav()
+    const classificationList = await utilities.buildClassificationList()
 
+    res.render("inventory/addInventory", {
+        nav,
+        title: "New Inventory",
+        classificationList,
+        errors : null 
+    })
+}
 
 // CREATING CLASSIFICATION AND INVENTORY
 invCont.addClassification = async function (req, res) {
     let nav = await utilities.getNav()
     const { classification_name } = req.body
-    console.log(classification_name)
     const creationResult = await invModel.createClassification(classification_name)
     
     if (creationResult) {
@@ -76,8 +88,50 @@ invCont.addClassification = async function (req, res) {
             errors : null 
         })
     }
-    
-
 }
 
+
+invCont.addInventory = async function (req, res) {
+    let nav = await utilities.getNav()
+    const {
+        inv_make, 
+        inv_model, 
+        inv_year, 
+        inv_description, 
+        inv_image, 
+        inv_thumbnail, 
+        inv_price, 
+        inv_miles,
+        inv_color, 
+        classification_id
+    } = req.body
+
+    const regResult = await invModel.createInventory(classification_id,
+        inv_make, 
+        inv_model, 
+        inv_year, 
+        inv_description, 
+        inv_image, 
+        inv_thumbnail, 
+        inv_price, 
+        inv_miles,
+        inv_color)
+
+    if (regResult) {
+        req.flash("notice", `Congratulations, you have successfully registered ${inv_make} ${inv_model}.`)
+        res.status(201).render("inventory/management", {
+            title: "Management",
+            nav,
+            errors: null,
+        })
+    }
+    else {
+        req.flash("notice", "Sorry, the registration failed.")
+        req.status(501).render("inventory/addInventory", {
+            title: "New Inventory",
+            nav,
+            errors : null 
+        })
+    }
+}
 module.exports = invCont

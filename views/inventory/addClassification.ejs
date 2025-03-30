@@ -11,7 +11,7 @@
 <div class="account-form">
     <form action="/inv/submit-classification" method="post">
         <label for="classification_name">Classification Name: <br>
-            <span>Classification name Cannot contain a space or special character of any kind.</span>
+            <span>Classification name cannot contain a space or special character of any kind.</span>
             <input type="text" name="classification_name" id="classificationName" required pattern="^[a-zA-Z]+$"value="<%= classification_name %>">   
         </label>
         <button type="submit"> Add Classification</button>
