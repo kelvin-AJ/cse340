@@ -12,6 +12,7 @@ const app = express()
 const expressLayouts = require("express-ejs-layouts")
 const session = require("express-session")
 const bodyParser = require("body-parser")
+const cookieParser = require("cookie-parser")
 
 // Modules (Routes, controllers and stuff)
 const static = require("./routes/static")
@@ -44,6 +45,8 @@ app.use(function(req, res, next){
 })
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
+app.use(cookieParser())
+app.use(utilities.checkJWTToken)
 
 /* ***********************
  * View Engine and Templates
@@ -90,15 +93,11 @@ app.use(async (err, req, res, next) => {
  * Values from .env (environment) file
  *************************/
 const port = process.env.PORT
-const host = null/* process.env.HOST */  //This might be affecting my code
+const host = process.env.HOST
 
 /* ***********************
  * Log statement to confirm server operation
  *************************/
-// app.listen(port, () => {
-//   console.log(`app listening on ${host}:${port}`)
-// })
-
 app.listen(port, () => {
-  console.log(`app listening on PORT:${port}`)
+  console.log(`app listening on ${host}:${port}`)
 })

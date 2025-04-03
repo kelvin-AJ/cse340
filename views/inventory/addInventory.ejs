@@ -9,7 +9,7 @@
    </ul>
   <% } %>
 <div class="account-form">
-    <form action="/inv/submit-inventory" method="post">
+    <form action="/inv/add-inventory" method="post">
         <label for="classification_id">Classification: <br></label>
             <%- classificationList %>
         
@@ -40,6 +40,6 @@
         <label for="inv_color">Color: <br> </label>
             <input type="text" name="inv_color" id="inv_color" required value="<%= locals.inv_color %>">
         
-        <button type="submit"> Add Classification</button>
+        <button type="submit"> Add Inventory</button>
     </form>
 </div>

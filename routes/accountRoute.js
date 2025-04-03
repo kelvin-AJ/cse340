@@ -6,15 +6,26 @@ const accountController = require("../controllers/accountController")
 const regValidate = require('../utilities/account-validation')
 
 
-router.use("/login", utilities.handleErrors(accountController.buildLogin))
-router.use("/signup", utilities.handleErrors(accountController.buildSignup))
-
 // Form Handling
-router.post("/create-account",
+router.post("/signup",
       regValidate.registrationRules(),
       regValidate.checkRegData,
       utilities.handleErrors(accountController.createAccount)
 )
+
+router.post(
+      "/login",
+      regValidate.loginRules(),
+      regValidate.checkLoginData,
+      utilities.handleErrors(accountController.accountLogin)
+)
+
+router.use("/login", utilities.handleErrors(accountController.buildLogin))
+router.use("/signup", utilities.handleErrors(accountController.buildSignup))
+
+
+
+
 
 
 module.exports = router
