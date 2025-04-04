@@ -6,6 +6,9 @@ const accountController = require("../controllers/accountController")
 const regValidate = require('../utilities/account-validation')
 
 
+// Default "/" route
+router.get("/", utilities.checkLogin, utilities.handleErrors(accountController.buildManagement))
+
 // Form Handling
 router.post("/signup",
       regValidate.registrationRules(),
@@ -22,9 +25,6 @@ router.post(
 
 router.use("/login", utilities.handleErrors(accountController.buildLogin))
 router.use("/signup", utilities.handleErrors(accountController.buildSignup))
-
-
-
 
 
 

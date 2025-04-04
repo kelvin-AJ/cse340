@@ -91,7 +91,7 @@ async function accountLogin(req, res) {
         res.cookie("jwt", accessToken, { httpOnly: true, secure: true, maxAge: 3600 * 1000 })
       }
 
-      return res.redirect("/")
+      return res.redirect("/account/")
     }
     else {
       req.flash("message notice", "Please check your credentials and try again.")
@@ -106,4 +106,15 @@ async function accountLogin(req, res) {
     throw new Error('Access Forbidden')
   }
 }
-module.exports = {buildLogin, buildSignup, createAccount, accountLogin}
+
+// Build Management View
+async function buildManagement(req, res) {
+  const nav = await utilities.getNav()
+    res.render("account/accountManagement", {
+      nav,
+      title: "Management"
+    })
+}
+
+
+module.exports = {buildLogin, buildSignup, createAccount, accountLogin, buildManagement}
