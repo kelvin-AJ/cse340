@@ -7,6 +7,19 @@ const invValidation = require("../utilities/inventory-validation")
 
 
 
+
+// Route to build inventory edit view 
+router.get("/edit/:inventoryId", 
+    utilities.handleErrors(invController.buildEditInventoryView)
+)
+router.get("/getInventory/:classificationId", 
+    utilities.handleErrors(invController.getInventoryJSON))
+router.post("/update/", 
+    invValidation.inventoryCreationRules(),
+    invValidation.checkInventoryCreationData,
+    utilities.handleErrors(invController.updateInventory)
+)
+
 // Route to build inventory by classification view
 router.get("/type/:classificationId", invController.buildByClassificationId);
 router.use("/detail/:inventoryId", invController.buildByInventoryId);
@@ -22,6 +35,7 @@ router.post("/add-inventory",
     invValidation.inventoryCreationRules(),
     invValidation.checkInventoryCreationData,
     utilities.handleErrors(invController.addInventory))
+
 
 
 // Add Classification Router

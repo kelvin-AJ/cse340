@@ -17,6 +17,7 @@ font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 a {
 text-decoration: none;
+transition: background-color 0.2s ease;
 }
 a:hover{
 text-decoration: underline;
@@ -34,6 +35,7 @@ div#wrapper{
   nav ul li {
     font-size: 0.8rem;
     display: inline-block;
+    transition: background-color 0.2s ease;
   }
   nav ul li:hover {
     background-color: var(--primary-gray);
@@ -263,7 +265,7 @@ label {
   font-size: 14px;
   margin-bottom: 5px;
 }
-input {
+input, select , textarea{
   width: 100%;
   padding: 10px;
   margin-bottom: 15px;
@@ -271,12 +273,12 @@ input {
   border-radius: 4px;
   font-size: 16px;
 }
-input:focus:invalid {
+input:focus:invalid{
   background-color: var(--primary-white);
   outline:none;
   border-bottom: 0.2rem solid var(--accent-red);
 }
-input:focus:valid {
+input:focus:valid select:focus textarea:focus{
   background-color: var(--primary-white);
   outline:none;
   border-bottom: 0.2rem solid rgb(103, 242, 103);
@@ -310,6 +312,65 @@ div.password-field-container button{
   padding: 1rem;
   font-weight: bold;
 }
+.management-links a:hover {
+  background-color: var(--primary-gray);
+}
+
+.management-links a svg {
+  fill: currentColor;
+}
+#inventoryDisplay {
+  margin: 1rem auto;
+  width: 80%;
+  max-width: 800px;
+  background-color: rgba(197, 197, 197, 0.249); 
+  border-radius: 0.3rem;
+  border-collapse: collapse;
+  overflow: hidden;
+}
+
+/* Last row cleanup */
+#inventoryDisplay tbody tr:last-child td {
+  border-bottom: none;
+}
+
+
+
+/* Base button style */
+.btn a {
+  display: inline-block;
+  padding: 6px 12px;
+  background-color: #007bff; /* Blue */
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 14px;
+ 
+}
+
+/* Differentiate Edit and Delete */
+.edit-btn a {
+  background-color: var(--primary-gray); 
+}
+
+.delete-btn a {
+  background-color: var(--accent-red); 
+}
+
+/* Hover effects */
+.btn a:hover {
+  background-color: var(--site-black); 
+}
+
+.delete-btn a:hover {
+  background-color: #bd2130;
+}
+
+button:disabled {
+  background-color: #6c757d; 
+  cursor: not-allowed;
+}
+
 /* 500 HANDLING */
  .error-msg-main {
     color: var(--accent-red);
