@@ -199,7 +199,6 @@ invCont.updateInventory = async function (req, res, next) {
       inv_color,
       classification_id,
     } = req.body
-    console.log(inv_id)
 
     const updateResult = await invModel.updateInventory(
       inv_id,  
@@ -243,4 +242,64 @@ invCont.updateInventory = async function (req, res, next) {
       })
     }
   }
+/////////////////////////////////
+// DELETE
+/////////////////////////////////
+
+// Deliver Delete Confirmation View
+invCont.buildDeleteInventoryView = async function (req, res, next) {
+    const inventory_id = parseInt(req.params.inventoryId);
+    
+    const nav = await utilities.getNav()
+    const inventoryDetails = await invModel.getInventoryItemByInventoryId(inventory_id)
+    const itemName = `${inventoryDetails.inv_make} ${inventoryDetails.inv_model}`
+
+    res.render("./inventory/deleteConfirm", {
+        title: "Delete " + itemName,
+        nav,
+        errors: null,
+        inv_id: inventoryDetails.inv_id,
+        inv_make: inventoryDetails.inv_make,
+        inv_model: inventoryDetails.inv_model,
+        inv_year: inventoryDetails.inv_year,
+        inv_price: inventoryDetails.inv_price,
+    })
+}
+
+
+/* ***************************
+ *  Delete Vehicle (No turning back from this)
+ * ************************** */
+invCont.deleteInventory = async function (req, res, next) {
+    let nav = await utilities.getNav()
+    const {
+      inv_id,
+      inv_make,
+      inv_model,
+      inv_price,
+      inv_year,
+    } = req.body
+
+    const updateResult = await invModel.deleteInventoryItem(inv_id)
+  
+    if (updateResult) {
+      req.flash("notice", `The ${inv_make} ${inv_model} was successfully Deleted.`)
+      res.redirect("/inv/")
+    } else {
+
+      const itemName = `${inv_make} ${inv_model}`
+      req.flash("notice", `Sorry, ${inv_make} ${inv_model} failed to delete`)
+      res.status(501).render("inventory/deleteInventory", {
+      title: `Delete  ${itemName}`,
+      nav,
+      errors: null,
+      inv_id,
+      inv_make,
+      inv_model,
+      inv_year,
+      inv_price
+      })
+    }
+  }
+
 module.exports = invCont

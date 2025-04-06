@@ -12,12 +12,17 @@ const invValidation = require("../utilities/inventory-validation")
 router.get("/edit/:inventoryId", 
     utilities.handleErrors(invController.buildEditInventoryView)
 )
+router.get("/delete/:inventoryId", 
+    utilities.handleErrors(invController.buildDeleteInventoryView)
+)
 router.get("/getInventory/:classificationId", 
     utilities.handleErrors(invController.getInventoryJSON))
 router.post("/update/", 
     invValidation.inventoryCreationRules(),
     invValidation.checkInventoryCreationData,
     utilities.handleErrors(invController.updateInventory)
+)
+router.post("/delete/", utilities.handleErrors(invController.deleteInventory)
 )
 
 // Route to build inventory by classification view
