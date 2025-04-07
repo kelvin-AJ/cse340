@@ -4,13 +4,13 @@
     </span>
     <div id="tools">
         <% if(loggedin) { %>
-            <span>Welcome, <%- accountData.account_firstname %></span>
+
+            <a title="Manage your account" href="/account"><span>Welcome, <%- accountData.account_firstname %></span></a>
             <% if(accountData.account_type == "Admin" ||  accountData.account_type == "Employee") {%>
                 <h3>Inventory Management</h3>
                 <p><a title="Manage Inventory" href="/inv">Inventory Management</a></p>
             <% } %>
             <a title="Click to log out" href="/account/logout">Log out</a>
-            <a title="Manage your account" href="/account">My Account</a>
         <% } else { %>
             <a title="Click to log in" href="/account/login">My account</a>
         <% } %>
