@@ -10,9 +10,11 @@ const invValidation = require("../utilities/inventory-validation")
 
 // Route to build inventory edit view 
 router.get("/edit/:inventoryId", 
+    utilities.verifyAccountType ,
     utilities.handleErrors(invController.buildEditInventoryView)
 )
 router.get("/delete/:inventoryId", 
+    utilities.verifyAccountType ,
     utilities.handleErrors(invController.buildDeleteInventoryView)
 )
 router.get("/getInventory/:classificationId", 
@@ -20,9 +22,12 @@ router.get("/getInventory/:classificationId",
 router.post("/update/", 
     invValidation.inventoryCreationRules(),
     invValidation.checkInventoryCreationData,
+    utilities.verifyAccountType ,
     utilities.handleErrors(invController.updateInventory)
 )
-router.post("/delete/", utilities.handleErrors(invController.deleteInventory)
+router.post("/delete/",
+    utilities.verifyAccountType ,
+     utilities.handleErrors(invController.deleteInventory)
 )
 
 // Route to build inventory by classification view
@@ -31,12 +36,14 @@ router.use("/detail/:inventoryId", invController.buildByInventoryId);
 
 // Handle Add Classification Form
 router.post("/add-classification",
+    utilities.verifyAccountType ,
     invValidation.classificationNamingRules(), 
     invValidation.checkClassificationName, 
     utilities.handleErrors(invController.addClassification))
 
 // Handle Add Inventory Form
 router.post("/add-inventory", 
+    utilities.verifyAccountType ,
     invValidation.inventoryCreationRules(),
     invValidation.checkInventoryCreationData,
     utilities.handleErrors(invController.addInventory))
@@ -44,12 +51,18 @@ router.post("/add-inventory",
 
 
 // Add Classification Router
-router.use("/add-classification", utilities.handleErrors(invController.buildAddClasssificationView))
+router.use("/add-classification", 
+    utilities.verifyAccountType ,
+    utilities.handleErrors(invController.buildAddClasssificationView))
 // Add Inventory Router
-router.use("/add-inventory", utilities.handleErrors(invController.buildAddInventoryView))
+router.use("/add-inventory", 
+    utilities.verifyAccountType ,
+    utilities.handleErrors(invController.buildAddInventoryView))
 
 
 // Build Management View
-router.use("/", utilities.handleErrors(invController.buildManagementView))
+router.use("/",
+    utilities.verifyAccountType ,
+     utilities.handleErrors(invController.buildManagementView))
 
 module.exports = router;

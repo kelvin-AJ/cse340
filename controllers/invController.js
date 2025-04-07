@@ -213,7 +213,6 @@ invCont.updateInventory = async function (req, res, next) {
       inv_color,
       classification_id
     )
-    console.log("ID FROM CONTROLLER: ", inv_id)
   
     if (updateResult) {
       const itemName = `${updateResult.inv_make} ${updateResult.inv_model}`

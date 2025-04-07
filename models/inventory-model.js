@@ -117,7 +117,6 @@ async function updateInventory(
       classification_id,
       inv_id
     ])
-    console.log("Data: ", data)
     return data.rows[0]
   } catch (error) {
     console.error("model error: " + error)

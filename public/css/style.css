@@ -62,9 +62,11 @@ color: var(--site-black);
 #tools {
 margin-left: auto;
 text-transform: uppercase;
+font-size: smaller;
 }
 #tools a {
 color: var(--accent-red);
+
 }
     
 /* NAVIGATION */
@@ -252,7 +254,7 @@ width: 100%;
   font-size: 0.95rem;
   color: var(--site-black);
 }
-div.account-form {
+div.account-form{
   background: var(--primary-white);
   border-radius: 8px;
   text-align: center;

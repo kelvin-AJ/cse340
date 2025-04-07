@@ -137,6 +137,7 @@ Util.checkJWTToken = (req, res, next) => {
      next()
     })
   } else {
+    res.locals.loggedin = 0;
    next()
   }
  }
@@ -154,6 +155,36 @@ Util.checkLogin = (req, res, next) => {
     next()
   } else {
     req.flash("notice", "Please log in")
+    return res.redirect("/account/login")
+  }
+}
+
+Util.getToolsHTML = (loggedin = false) => {
+  let toolsHTML = ` <div id="tools">
+                      <a title="Click to log in" href="/account/login">My account</a>
+                    </div>`
+
+  console.log(!loggedin)
+  
+  if(!loggedin) return toolsHTML
+  if(loggedin) {
+    toolsHTML = `<div id="tools">
+                    <p>Welcome, ${loggedin}</p>
+                    <a title="Click to log out" href="/account/logout">Log out</a>
+                  </div>`
+}
+}
+
+Util.verifyAccountType = (req, res, next) => {
+
+  if (!res.locals.accountData) {
+    req.flash("notice", "Please log in")
+    return res.redirect("/account/login")
+  }
+  if (res.locals.accountData.account_type == "Admin" ||  res.locals.accountData.account_type == "Employee") {
+    next()
+  } else {
+    req.flash("notice", "You don't have access to the management page")
     return res.redirect("/account/login")
   }
 }

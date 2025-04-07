@@ -22,9 +22,19 @@ router.post(
       regValidate.checkLoginData,
       utilities.handleErrors(accountController.accountLogin)
 )
+router.post("/update", 
+      regValidate.accountUpdateRules(),
+      regValidate.validateUpdateData,
+      utilities.handleErrors(accountController.updateAccount)
+)
+router.post("/updatePassword",
+      regValidate.passwordUpdateRules(),
+      utilities.handleErrors(accountController.updatePassword)
+)
 
 router.use("/login", utilities.handleErrors(accountController.buildLogin))
 router.use("/signup", utilities.handleErrors(accountController.buildSignup))
+router.use("/logout", utilities.handleErrors(accountController.logout))
 
 
 
