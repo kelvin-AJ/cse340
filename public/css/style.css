@@ -319,7 +319,7 @@ div.password-field-container button{
 }
 
 .management-links a svg {
-  fill: currentColor;
+  all: currentColor;
 }
 #inventoryDisplay {
   margin: 1rem auto;
