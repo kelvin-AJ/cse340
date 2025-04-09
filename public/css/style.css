@@ -318,9 +318,9 @@ div.password-field-container button{
   background-color: var(--primary-gray);
 }
 
-.management-links a svg {
+/* .management-links a svg {
   all: currentColor;
-}
+} */
 #inventoryDisplay {
   margin: 1rem auto;
   width: 80%;
