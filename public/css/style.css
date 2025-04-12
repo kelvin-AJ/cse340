@@ -336,7 +336,9 @@ div.password-field-container button{
   border-bottom: none;
 }
 
-
+.fav-inv{
+  border: var(--accent-red) 0.2rem solid;
+}
 
 /* Base button style */
 .btn a {

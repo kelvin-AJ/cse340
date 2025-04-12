@@ -141,13 +141,24 @@ async function updateFavouriteState(inv_id, bool) {
   try{
   const sql= "UPDATE public.inventory SET favourite=$1 WHERE inv_id=$2 RETURNING *;"
 
-  const result = pool.query(sql, [bool, inv_id])
+  const result = await pool.query(sql, [bool, inv_id])
   return result
   }catch (error){
     console.log("Erropr updating favorite state")
   }
 }
 
+// GET FAVOURITE VEHICLES
+async function getFavoriteInventories() {
+    try{
+      const data = await pool.query("SELECT * FROM public.inventory WHERE favourite=true")
+
+      return data.rows
+    } catch (error) {
+      console.log("Couldn't get favourites")
+    }
+}
+
 module.exports = {getClassifications, getInventoryByClassificationId, getInventoryItemByInventoryId, createClassification, createInventory, updateInventory, deleteInventoryItem,
-  updateFavouriteState
+  updateFavouriteState, getFavoriteInventories
 }

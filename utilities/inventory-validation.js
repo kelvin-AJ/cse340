@@ -89,10 +89,42 @@ invValidate.inventoryCreationRules = () => {
         ]
 }
 
+invValidate.lovedAddingRules = () => {
+    return [
+        body('inv_id')
+            .trim()
+            .notEmpty()
+            .isLength({ min: 1 })
+            .isNumeric()
+            .withMessage("Can't tell the car you're point at"),
+    ]
+}
+
+
+invValidate.checkIDinLovedForm = async (req, res, next) => {
+    let errors = []
+    errors = validationResult(req)
+    if(!errors.isEmpty()) {
+        const inventory_id = req.body.inv_id
+        const nav = await utilities.getNav()
+        
+        const inventoryDetails = await invModel.getInventoryItemByInventoryId(inventory_id)
+        const detail = await utilities.buildInventoryDetail(inventoryDetails)
+
+        res.render(`./inventory/detail`, {
+            title: inventoryDetails.inv_make,
+            nav,
+            detail
+        }) 
+        return
+    }
+    next()
+}
 
 // classification Creation Validation
 invValidate.checkClassificationName = async (req , res , next) => {
-    let errors = [].
+    let errors = []
+    console.log("here")
     errors = validationResult(req)
         if (!errors.isEmpty()) {
             let nav = await utilities.getNav()

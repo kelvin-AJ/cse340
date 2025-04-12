@@ -312,7 +312,8 @@ invCont.updateFavorite = async function (req, res, next) {
     const {rows} = await invModel.updateFavouriteState(inventory_id, !favourite)
 
     if(rows[0]){
-        req.flash("notice", !favourite ? "Added to Favourites" : "Removed frome Favourites")
+        console.log("Done")
+        req.flash("notice", !favourite ? "Added to Loved" : "Removed frome Loved")
        
     }else {
         req.flash("notice","Something went wrong")
@@ -324,5 +325,16 @@ invCont.updateFavorite = async function (req, res, next) {
     }) 
 }
 
+// Build Favourites view 
+invCont.buildFavoritesView = async function (req, res, next) {
+    const data = await invModel.getFavoriteInventories()
+    const grid = await utilities.buildClassificationGrid(data)
+    let nav = await utilities.getNav()
+    res.render("./inventory/classification", {
+        title: "Most Loved vehicles",
+        nav,
+        grid,
+    })
+}
 
 module.exports = invCont

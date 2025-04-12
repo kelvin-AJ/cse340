@@ -31,13 +31,18 @@ router.post("/delete/",
 )
 // Route to handle favorite updating form
 router.post("/addToFavorite",
+    invValidation.lovedAddingRules(),
+    invValidation.checkIDinLovedForm,
     utilities.handleErrors(invController.updateFavorite)
 )
+
 
 
 // Route to build inventory by classification view
 router.get("/type/:classificationId", invController.buildByClassificationId);
 router.use("/detail/:inventoryId", invController.buildByInventoryId);
+// View Favorites
+router.use("/loved", utilities.handleErrors(invController.buildFavoritesView))
 
 // Handle Add Classification Form
 router.post("/add-classification",
