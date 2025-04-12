@@ -135,4 +135,19 @@ async function deleteInventoryItem(inv_id) {
 }
 
 
-module.exports = {getClassifications, getInventoryByClassificationId, getInventoryItemByInventoryId, createClassification, createInventory, updateInventory, deleteInventoryItem}
+// UPDATE INVENTORY FAVOURITE STATE
+async function updateFavouriteState(inv_id, bool) {
+
+  try{
+  const sql= "UPDATE public.inventory SET favourite=$1 WHERE inv_id=$2 RETURNING *;"
+
+  const result = pool.query(sql, [bool, inv_id])
+  return result
+  }catch (error){
+    console.log("Erropr updating favorite state")
+  }
+}
+
+module.exports = {getClassifications, getInventoryByClassificationId, getInventoryItemByInventoryId, createClassification, createInventory, updateInventory, deleteInventoryItem,
+  updateFavouriteState
+}

@@ -29,6 +29,11 @@ router.post("/delete/",
     utilities.verifyAccountType ,
      utilities.handleErrors(invController.deleteInventory)
 )
+// Route to handle favorite updating form
+router.post("/addToFavorite",
+    utilities.handleErrors(invController.updateFavorite)
+)
+
 
 // Route to build inventory by classification view
 router.get("/type/:classificationId", invController.buildByClassificationId);

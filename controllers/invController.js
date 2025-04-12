@@ -22,7 +22,6 @@ invCont.buildByClassificationId = async function (req, res, next) {
 
 invCont.buildByInventoryId = async function (req, res, next) {
     const inventory_id = req.params.inventoryId
-    console.log(inventory_id)
     const inventoryDetails = await invModel.getInventoryItemByInventoryId(inventory_id)
     const detail = await utilities.buildInventoryDetail(inventoryDetails)
     let nav = await utilities.getNav()
@@ -300,5 +299,30 @@ invCont.deleteInventory = async function (req, res, next) {
       })
     }
   }
+
+// ADD INVENTORY TO FAVOURITE
+invCont.updateFavorite = async function (req, res, next) {
+    const inventory_id = req.body.inv_id
+    const nav = await utilities.getNav()
+    
+    const inventoryDetails = await invModel.getInventoryItemByInventoryId(inventory_id)
+    const detail = await utilities.buildInventoryDetail(inventoryDetails)
+    const {favourite} = await invModel.getInventoryItemByInventoryId(inventory_id)
+    
+    const {rows} = await invModel.updateFavouriteState(inventory_id, !favourite)
+
+    if(rows[0]){
+        req.flash("notice", !favourite ? "Added to Favourites" : "Removed frome Favourites")
+       
+    }else {
+        req.flash("notice","Something went wrong")
+    }
+    res.render(`./inventory/detail`, {
+        title: inventoryDetails.inv_make,
+        nav,
+        detail
+    }) 
+}
+
 
 module.exports = invCont

@@ -62,12 +62,22 @@ Util.buildInventoryDetail = async function(vehicle) {
 				<img src="${vehicleObj.inv_image}" alt="Image of ${vehicleObj.inv_make} ${vehicleObj.inv_model}">
 			</div>
 			<div class="details-main">
-				<div><span>${vehicleObj.inv_make}</span> <span>${vehicleObj.inv_model}</span></div>
+				<div>
+          <span>${vehicleObj.inv_make} </span> <span>${vehicleObj.inv_model}</span>
+        </div>
 				<span class="inventory-detail-description">${vehicleObj.inv_description}</span>
 				<span class="inventory-detail-price">$${parseInt(vehicleObj.inv_price).toLocaleString('en-US')}</span>
 				<span class="inventory-detail-mileage">Milage: ${parseInt(vehicleObj.inv_miles).toLocaleString('en-US')}</span>
 				<span class="inventory-detail-color">Color: ${vehicleObj.inv_color}</span>
+        <form method="POST" action="/inv/addToFavorite">
+          <input type="hidden" value=${vehicleObj.inv_id} name="inv_id" id="inv_id">
+          <button class="favorite-button" type="submit">
+           ${vehicleObj.favourite? "Remove from Favourites" : "Add to Favourites"} <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M200-120v-640q0-33 23.5-56.5T280-840h400q33 0 56.5 23.5T760-760v640L480-240 200-120Zm80-122 200-86 200 86v-518H280v518Zm0-518h400-400Z"></path></svg>
+            
+          </button>
+      </form>
 			</div>
+      
 		</div>`
 
 

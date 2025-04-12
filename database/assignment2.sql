@@ -29,3 +29,7 @@ SELECT inv_make, inv_model, inventory.classification_id, classification_name FRO
 
 -- UPDATE IMAGE AND THUMBNAIL URL
 UPDATE inventory SET inv_image = REPLACE(inv_image, 'images/', 'images/vehicles/'),inv_thumbnail = REPLACE(inv_thumbnail, 'images/', 'images/vehicles/')
+
+-- ADD FAVORITE(BOOLEAN) COLUMN TO INVENTORY TABLE 
+ALTER TABLE inventory
+ADD favourite BOOLEAN default FALSE;
